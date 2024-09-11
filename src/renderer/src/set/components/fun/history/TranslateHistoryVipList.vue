@@ -146,7 +146,8 @@ const selectTranslateRecord = (translateRecord): void => {
             usSpeech: item.usSpeech,
             ukSpeech: item.ukSpeech,
             explains: item.explains ? JSON.parse(item.explains) : [],
-            wfs: item.wfs ? JSON.parse(item.wfs) : []
+            wfs: item.wfs ? JSON.parse(item.wfs) : [],
+            translateTime: (new Date()).getTime()
           }
         }
       })

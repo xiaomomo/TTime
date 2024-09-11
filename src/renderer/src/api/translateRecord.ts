@@ -60,7 +60,9 @@ export class TranslateRecordSavePo {
     translateRecordSavePo.translateContent = translateRecord.translateContent
     translateRecordSavePo.languageType = translateRecord.languageType
     translateRecordSavePo.languageResultType = translateRecord.languageResultType
-    translateRecordSavePo.recordDetailList = TranslateRecordDetail.buildList(translateRecord.translateServiceRecordList)
+    translateRecordSavePo.recordDetailList = TranslateRecordDetail.buildList(
+      translateRecord.translateServiceRecordList
+    )
     return translateRecordSavePo
   }
 }
@@ -75,10 +77,11 @@ export class TranslateRecordDetail {
   ukSpeech: string
   explains: string
   wfs: string
+  translateTime: string
 
   static build(translateServiceRecord: TranslateServiceRecordVo): TranslateRecordDetail {
-    let translateRecordDetail = new TranslateRecordDetail()
-    let translateVo: TranslateVo = translateServiceRecord.translateVo
+    const translateRecordDetail = new TranslateRecordDetail()
+    const translateVo: TranslateVo = translateServiceRecord.translateVo
     translateRecordDetail.translateServiceType = translateServiceRecord.translateServiceType
     translateRecordDetail.translateServiceId = translateServiceRecord.translateServiceId
     if (typeof translateVo.translateList !== 'string') {
@@ -90,10 +93,13 @@ export class TranslateRecordDetail {
     translateRecordDetail.ukSpeech = translateVo.ukSpeech
     translateRecordDetail.explains = JSON.stringify(translateVo.explains)
     translateRecordDetail.wfs = JSON.stringify(translateVo.wfs)
+    translateRecordDetail.translateTime = '' + new Date().getTime()
     return translateRecordDetail
   }
 
-  static buildList(translateServiceRecordList: Array<TranslateServiceRecordVo>): Array<TranslateRecordDetail> {
+  static buildList(
+    translateServiceRecordList: Array<TranslateServiceRecordVo>
+  ): Array<TranslateRecordDetail> {
     return translateServiceRecordList.map((value: TranslateServiceRecordVo) => {
       return TranslateRecordDetail.build(value)
     })
